@@ -1,0 +1,112 @@
+
+
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+<div class="container-fluid">
+    <h1>Doğru Cevabı Bul (Rastgele Sorular)</h1>
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8 mt-5">
+            <!-- İçeriğinizi buraya ekleyin -->
+            <div id="oyunBaslatmaBilgisi">
+                <h5>Rastgele Sorular İle Puan Kazanmaya Başlamak İçin Testi
+                    Başlat
+                    <label for>
+                        <button class="btn btn-primary"
+                            id="testiBaslat"
+                            onclick="oyunuBaslat()">Başla</button>
+                    </label>
+                </h5>
+            </div>
+
+            <div id="sorularDiv" hidden>
+                <div class="row m-1">
+                    <div class="col-md-1 mb-3 p-2 bg-success">
+                        <label for class="fw-bold fs-6">Puan : </label>
+                        <label for class="fw-bold fs-5"
+                            id="toplamPuan">00</label>
+                    </div>
+                    <div class="col-md-1 mb-3 p-2 bg-primary ms-auto">
+                        <label for class="fw-bold fs-6">Süre : </label>
+                        <label for class="fw-bold fs-5"
+                            id="kalanSure">10:00</label>
+                    </div>
+                </div>
+                <div class="p-4 mb-2 bg-danger text-white fs-5 fw-bold">
+                    <label for class="text-white">Soru : </label>
+                    <label for class="text-white"
+                        id="sorulanSoru"></label>
+                </div>
+                <ul class="list-group mt-4" id="siklar">
+                    <li class="list-group-item bg-primary">
+                        <a href class="nav-link cevap" id="aSikkiATag">
+                            <div class="card bg-primary">
+                                <div class="card-body text-white fw-bold">
+                                    <label for>
+                                        A - )
+                                    </label>
+                                    <label for id="aSikki">
+
+                                    </label>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list-group-item bg-warning mt-2">
+                        <a href class="nav-link cevap" id="bSikkiATag">
+                            <div class="card bg-warning">
+                                <div class="card-body text-white fw-bold">
+                                    <label for>
+                                        B - )
+                                    </label>
+                                    <label for id="bSikki">
+
+                                    </label>
+                                </div>
+                            </div>
+
+                        </a>
+                    </li>
+                    <li class="list-group-item bg-success mt-2">
+                        <a href class="nav-link cevap" id="cSikkiATag">
+                            <div class="card bg-success">
+                                <div class="card-body text-white fw-bold">
+                                    <label for>
+                                        C - )
+                                    </label>
+                                    <label for id="cSikki">
+
+                                    </label>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list-group-item bg-secondary mt-2">
+                        <a href class="nav-link cevap" id="dSikkiATag">
+                            <div class="card bg-secondary">
+                                <div class="card-body text-white fw-bold">
+                                    <label for>
+                                        D - )
+
+                                    </label>
+                                    <label for id="dSikki">
+
+                                    </label>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/static/js/dcb.js"></script>
+
+
+<%- include('../partials/footer') %>
