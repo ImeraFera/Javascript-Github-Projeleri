@@ -17,10 +17,6 @@ async function sorulariGetir() {
     }
 }
 
-
-
-
-
 function soruGoster(soruVeCevap) {
 
     console.log(soruVeCevap.soru_icerik);
@@ -74,10 +70,14 @@ async function oyunuBaslat() {
             }
 
             i++;
-            if (i < sorularVeCevaplari.length)
+            if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
                 soruGoster(sorularVeCevaplari[i]);
-            else
-                console.log("Sorular Bitti Tebrikler");
+            }
+            else if (i >= sorularVeCevaplari.length) {
+                oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
+            } else {
+                oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
+            }
 
         })
         document.getElementById("bSikkiATag").addEventListener("click", (event) => {
@@ -94,10 +94,14 @@ async function oyunuBaslat() {
             }
 
             i++;
-            if (i < sorularVeCevaplari.length)
+            if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
                 soruGoster(sorularVeCevaplari[i]);
-            else
-                console.log("Sorular Bitti Tebrikler");
+            }
+            else if (i >= sorularVeCevaplari.length) {
+                oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
+            } else {
+                oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
+            }
         })
         document.getElementById("cSikkiATag").addEventListener("click", (event) => {
             event.preventDefault();
@@ -113,10 +117,14 @@ async function oyunuBaslat() {
             }
 
             i++;
-            if (i < sorularVeCevaplari.length)
+            if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
                 soruGoster(sorularVeCevaplari[i]);
-            else
-                console.log("Sorular Bitti Tebrikler");
+            }
+            else if (i >= sorularVeCevaplari.length) {
+                oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
+            } else {
+                oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
+            }
         })
         document.getElementById("dSikkiATag").addEventListener("click", (event) => {
             event.preventDefault();
@@ -132,10 +140,14 @@ async function oyunuBaslat() {
             }
 
             i++;
-            if (i < sorularVeCevaplari.length)
+            if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
                 soruGoster(sorularVeCevaplari[i]);
-            else
-                console.log("Sorular Bitti Tebrikler");
+            }
+            else if (i >= sorularVeCevaplari.length) {
+                oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
+            } else {
+                oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
+            }
         })
 
     } catch (error) {
@@ -144,7 +156,9 @@ async function oyunuBaslat() {
 }
 
 
-function sonrakiSoru() {
+function oyunBitti(mesaj) {
+document.getElementById("sorularDiv").setAttribute("hidden", "true");
+alert(mesaj);
 
 }
 
@@ -173,23 +187,17 @@ function sureBaslat() {
         const dakika = Math.floor(sureSayac / 60);
         const saniye = sureSayac % 60;
 
-        // Kalan süreyi ekrana yazdırın
         document.getElementById("kalanSure").textContent = `${dakika}:${saniye < 10 ? '0' : ''}${saniye}`;
 
-        // Süreyi azaltın
         sureSayac--;
 
-        // Zaman bitene kadar her saniye bu fonksiyonu çağırın
         if (sureSayac >= 0) {
             setTimeout(updateSure, 1000);
         } else {
-            // Zaman bittiğinde yapılacak işlemleri buraya ekleyebilirsiniz
             document.getElementById("kalanSure").textContent = 'Süre doldu!';
-            // Örneğin, başka bir fonksiyonu çağırabilir veya oyunu sonlandırabilirsiniz.
         }
     }
 
-    // İlk çağrıyı yapın
     updateSure();
 }
 
