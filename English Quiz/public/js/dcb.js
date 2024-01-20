@@ -1,29 +1,25 @@
 // global değişkenler
-let sorularVeCevaplar;
 var isaretlenenCevap;
 
 
-// * Soruları veritabanından getirmeye yarayan api
-async function sorulariGetir() {
-    try {
-        const data = await $.ajax({
-            url: "/sorulariGetir",
-            method: "GET",
-            dataType: "json"
-        });
-        console.log("Data =", data);
-        sorularVeCevaplar = data;
-        return sorularVeCevaplar;
-    } catch (err) {
-        console.error(err);
-        throw err;
+    // * Soruları veritabanından getirmeye yarayan api
+    async function sorulariGetir() {
+        try {
+            const data = await $.ajax({
+                url: "/sorulariGetir",
+                method: "GET",
+                dataType: "json"
+            });
+            return data;
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
     }
-}
+
 
 // * Her bir seçenek seçildikten sonra sıradaki soruyu ekrana çıkarıyor.
 function soruGoster(soruVeCevap) {
-
-    console.log(soruVeCevap.soru_icerik);
 
     document.getElementById("sorulanSoru").textContent = soruVeCevap.soru_icerik;
 
@@ -47,13 +43,19 @@ function soruGoster(soruVeCevap) {
 }
 
 
+
 // * Oyun başladığında ana metod olarak bu metod çalışıyor . 
 async function oyunuBaslat() {
+
+
     try {
         const sorularVeCevaplari = await sorulariGetir();
         let i = 0;
+        isaretlenenCevap = "";
+
         document.getElementById("oyunBaslatmaBilgisi").setAttribute("hidden", "true");
         document.getElementById("sorularDiv").removeAttribute("hidden");
+        document.getElementById("toplamPuan").textContent = "00";
 
         sureBaslat();
 
@@ -64,6 +66,7 @@ async function oyunuBaslat() {
             isaretlenenCevap = document.getElementById("aSikki").textContent;
 
             const dogruMu = isaretlenenDogrumu(sorularVeCevaplari[i].soru_dogruCevap, isaretlenenCevap);
+            console.log(sorularVeCevaplari[i].soru_dogruCevap);
 
             if (dogruMu) {
                 console.log("dogru cevap");
@@ -89,6 +92,7 @@ async function oyunuBaslat() {
             event.preventDefault();
             isaretlenenCevap = document.getElementById("bSikki").textContent;
             const dogruMu = isaretlenenDogrumu(sorularVeCevaplari[i].soru_dogruCevap, isaretlenenCevap);
+            console.log(sorularVeCevaplari[i].soru_dogruCevap);
 
             if (dogruMu) {
                 console.log("dogru cevap");
@@ -112,6 +116,7 @@ async function oyunuBaslat() {
             event.preventDefault();
             isaretlenenCevap = document.getElementById("cSikki").textContent;
             const dogruMu = isaretlenenDogrumu(sorularVeCevaplari[i].soru_dogruCevap, isaretlenenCevap);
+            console.log(sorularVeCevaplari[i].soru_dogruCevap);
 
             if (dogruMu) {
                 console.log("dogru cevap");
@@ -136,7 +141,7 @@ async function oyunuBaslat() {
             event.preventDefault();
             isaretlenenCevap = document.getElementById("dSikki").textContent;
             const dogruMu = isaretlenenDogrumu(sorularVeCevaplari[i].soru_dogruCevap, isaretlenenCevap);
-
+            console.log(sorularVeCevaplari[i].soru_dogruCevap);
             if (dogruMu) {
                 console.log("dogru cevap");
                 puanEkle();
@@ -165,6 +170,10 @@ async function oyunuBaslat() {
 function oyunBitti(mesaj) {
     document.getElementById("sorularDiv").setAttribute("hidden", "true");
     alert(mesaj);
+    document.getElementById("oyunBaslatmaBilgisi").removeAttribute("hidden");
+    document.getElementById("oyunBaslatmaBilgisi").children[0].textContent = "Tekrar Denemek İster Misin ? "
+
+    
 
 }
 
