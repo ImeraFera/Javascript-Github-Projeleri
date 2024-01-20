@@ -1,6 +1,9 @@
+// global değişkenler
 let sorularVeCevaplar;
 var isaretlenenCevap;
 
+
+// * Soruları veritabanından getirmeye yarayan api
 async function sorulariGetir() {
     try {
         const data = await $.ajax({
@@ -17,6 +20,7 @@ async function sorulariGetir() {
     }
 }
 
+// * Her bir seçenek seçildikten sonra sıradaki soruyu ekrana çıkarıyor.
 function soruGoster(soruVeCevap) {
 
     console.log(soruVeCevap.soru_icerik);
@@ -43,7 +47,7 @@ function soruGoster(soruVeCevap) {
 }
 
 
-
+// * Oyun başladığında ana metod olarak bu metod çalışıyor . 
 async function oyunuBaslat() {
     try {
         const sorularVeCevaplari = await sorulariGetir();
@@ -70,6 +74,7 @@ async function oyunuBaslat() {
             }
 
             i++;
+
             if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
                 soruGoster(sorularVeCevaplari[i]);
             }
@@ -126,6 +131,7 @@ async function oyunuBaslat() {
                 oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
             }
         })
+
         document.getElementById("dSikkiATag").addEventListener("click", (event) => {
             event.preventDefault();
             isaretlenenCevap = document.getElementById("dSikki").textContent;
@@ -155,14 +161,14 @@ async function oyunuBaslat() {
     }
 }
 
-
+// * Oyun bittiğinde kullanıcıya bir mesaj gösterip gereken işlemleri yapıyor
 function oyunBitti(mesaj) {
-document.getElementById("sorularDiv").setAttribute("hidden", "true");
-alert(mesaj);
+    document.getElementById("sorularDiv").setAttribute("hidden", "true");
+    alert(mesaj);
 
 }
 
-
+// * Kişinin seçtiği seçeneğe göre true ya da false dönüyor
 function isaretlenenDogrumu(dogruCevap, isaretlenenCevap) {
     if (dogruCevap == isaretlenenCevap) {
         return true;
@@ -171,13 +177,14 @@ function isaretlenenDogrumu(dogruCevap, isaretlenenCevap) {
     }
 }
 
+// * Kişi doğru bildiği her cevap için 10 puan kazanıyor
 function puanEkle() {
     const eklenecekPuan = 10;
     const yeniPuan = parseInt(document.getElementById("toplamPuan").textContent) + eklenecekPuan;
     document.getElementById("toplamPuan").textContent = yeniPuan;
 }
 
-
+// * Burada ki metod 5 dakikalık bir süre tutuyor.
 function sureBaslat() {
     const sure = 5 * 60;
 
