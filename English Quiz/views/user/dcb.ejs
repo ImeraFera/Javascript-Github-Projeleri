@@ -25,23 +25,29 @@
 
             <div id="sorularDiv" hidden>
                 <div class="row m-1">
-                    <div class="col-md-1 mb-3 p-2 bg-success">
-                        <label for class="fw-bold fs-6">Puan : </label>
-                        <label for class="fw-bold fs-5"
+                    <div class="col-md-1 rounded-3 mb-2 p-2 bg-success">
+                        <label for class="fw-bold fs-6">
+                            <img src="/static/images/correct.gif"
+                            style="width: 50px; margin-left: 7px" alt>                        </label>
+                        <label for class="fw-bold fs-5" style="margin-left: 20px"
                             id="toplamPuan">00</label>
                     </div>
-                    <div class="col-md-1 mb-3 p-2 bg-primary ms-auto">
-                        <label for class="fw-bold fs-6">Süre : </label>
+                    <div class="col-md-1 rounded-3 mb-2 p-2 bg-primary ms-auto">
+                        <img src="/static/images/time.gif"
+                            style="width: 50px; margin-left: 5px" alt>
                         <label for class="fw-bold fs-5"
-                            id="kalanSure">10:00</label>
+                            id="kalanSure"
+                            style="margin-left: 11px">10:00</label>
                     </div>
                 </div>
-                <div class="p-4 mb-2 bg-danger text-white fs-5 fw-bold">
-                    <label for class="text-white">Soru : </label>
+                <div
+                    class="p-3  border border-3  rounded-5 border-white text-white fs-5 fw-bold">
+                    <img src="/static/images/question.png"
+                        style="width: 50px; margin-right: 10px;" alt>
                     <label for class="text-white"
                         id="sorulanSoru"></label>
                 </div>
-                <ul class="list-group mt-4" id="siklar">
+                <ul class="list-group mt-3" id="siklar">
                     <li class="list-group-item bg-primary">
                         <a href class="nav-link cevap" id="aSikkiATag">
                             <div class="card bg-primary">

@@ -2,20 +2,20 @@
 var isaretlenenCevap;
 
 
-    // * Soruları veritabanından getirmeye yarayan api
-    async function sorulariGetir() {
-        try {
-            const data = await $.ajax({
-                url: "/sorulariGetir",
-                method: "GET",
-                dataType: "json"
-            });
-            return data;
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
+// * Soruları veritabanından getirmeye yarayan api
+async function sorulariGetir() {
+    try {
+        const data = await $.ajax({
+            url: "/sorulariGetir",
+            method: "GET",
+            dataType: "json"
+        });
+        return data;
+    } catch (err) {
+        console.error(err);
+        throw err;
     }
+}
 
 
 // * Her bir seçenek seçildikten sonra sıradaki soruyu ekrana çıkarıyor.
@@ -66,99 +66,198 @@ async function oyunuBaslat() {
             isaretlenenCevap = document.getElementById("aSikki").textContent;
 
             const dogruMu = isaretlenenDogrumu(sorularVeCevaplari[i].soru_dogruCevap, isaretlenenCevap);
-            console.log(sorularVeCevaplari[i].soru_dogruCevap);
 
             if (dogruMu) {
-                console.log("dogru cevap");
+
                 puanEkle();
+                const gifImg = dogruYanlisGif("correct", "aSikki");
+                setTimeout(() => {
+
+                    if (gifImg != null) {
+                        document.getElementById("aSikki").removeChild(gifImg);
+                    }
+
+                    i++;
+
+                    if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
+                        soruGoster(sorularVeCevaplari[i]);
+                    } else if (i >= sorularVeCevaplari.length) {
+                        oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    } else {
+                        oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    }
+                }, 2000);
 
             } else {
-                console.log("yanlis cevap");
-            }
 
-            i++;
 
-            if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
-                soruGoster(sorularVeCevaplari[i]);
-            }
-            else if (i >= sorularVeCevaplari.length) {
-                oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
-            } else {
-                oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
+
+                const gifImg = dogruYanlisGif("wrong", "aSikki");
+                setTimeout(() => {
+
+                    if (gifImg != null) {
+                        document.getElementById("aSikki").removeChild(gifImg);
+                    }
+
+                    i++;
+
+                    if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
+                        soruGoster(sorularVeCevaplari[i]);
+                    } else if (i >= sorularVeCevaplari.length) {
+                        oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    } else {
+                        oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    }
+                }, 2000);
             }
 
         })
+
         document.getElementById("bSikkiATag").addEventListener("click", (event) => {
             event.preventDefault();
             isaretlenenCevap = document.getElementById("bSikki").textContent;
             const dogruMu = isaretlenenDogrumu(sorularVeCevaplari[i].soru_dogruCevap, isaretlenenCevap);
-            console.log(sorularVeCevaplari[i].soru_dogruCevap);
+
 
             if (dogruMu) {
-                console.log("dogru cevap");
+
                 puanEkle();
 
+                const gifImg = dogruYanlisGif("correct", "bSikki");
+
+                setTimeout(() => {
+                    i++;
+                    if (gifImg != null) {
+                        document.getElementById("bSikki").removeChild(gifImg);
+                    }
+
+
+                    if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
+                        soruGoster(sorularVeCevaplari[i]);
+                    } else if (i >= sorularVeCevaplari.length) {
+                        oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    } else {
+                        oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    }
+                }, 2000);
+
             } else {
-                console.log("yanlis cevap");
+
+                const gifImg = dogruYanlisGif("wrong", "bSikki");
+                setTimeout(() => {
+                    if (gifImg != null) {
+                        document.getElementById("bSikki").removeChild(gifImg);
+                    }
+
+                    i++;
+
+                    if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
+                        soruGoster(sorularVeCevaplari[i]);
+                    } else if (i >= sorularVeCevaplari.length) {
+                        oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    } else {
+                        oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    }
+                }, 2000);
             }
 
-            i++;
-            if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
-                soruGoster(sorularVeCevaplari[i]);
-            }
-            else if (i >= sorularVeCevaplari.length) {
-                oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
-            } else {
-                oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
-            }
         })
         document.getElementById("cSikkiATag").addEventListener("click", (event) => {
             event.preventDefault();
             isaretlenenCevap = document.getElementById("cSikki").textContent;
             const dogruMu = isaretlenenDogrumu(sorularVeCevaplari[i].soru_dogruCevap, isaretlenenCevap);
-            console.log(sorularVeCevaplari[i].soru_dogruCevap);
+
 
             if (dogruMu) {
-                console.log("dogru cevap");
+
                 puanEkle();
 
+                const gifImg = dogruYanlisGif("correct", "cSikki");
+
+                setTimeout(() => {
+
+                    if (gifImg != null) {
+                        document.getElementById("cSikki").removeChild(gifImg);
+                    }
+
+                    i++;
+
+                    if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
+                        soruGoster(sorularVeCevaplari[i]);
+                    } else if (i >= sorularVeCevaplari.length) {
+                        oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    } else {
+                        oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    }
+                }, 2000);
+
             } else {
-                console.log("yanlis cevap");
+
+                const gifImg = dogruYanlisGif("wrong", "cSikki");
+                setTimeout(() => {
+
+                    if (gifImg != null) {
+                        document.getElementById("cSikki").removeChild(gifImg);
+                    }
+                    i++;
+
+                    if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
+                        soruGoster(sorularVeCevaplari[i]);
+                    } else if (i >= sorularVeCevaplari.length) {
+                        oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    } else {
+                        oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    }
+                }, 2000);
             }
 
-            i++;
-            if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
-                soruGoster(sorularVeCevaplari[i]);
-            }
-            else if (i >= sorularVeCevaplari.length) {
-                oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
-            } else {
-                oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
-            }
         })
 
         document.getElementById("dSikkiATag").addEventListener("click", (event) => {
             event.preventDefault();
             isaretlenenCevap = document.getElementById("dSikki").textContent;
             const dogruMu = isaretlenenDogrumu(sorularVeCevaplari[i].soru_dogruCevap, isaretlenenCevap);
-            console.log(sorularVeCevaplari[i].soru_dogruCevap);
+
             if (dogruMu) {
-                console.log("dogru cevap");
+
                 puanEkle();
+                const gifImg = dogruYanlisGif("correct", "dSikki");
+                setTimeout(() => {
+                    if (gifImg != null) {
+                        document.getElementById("dSikki").removeChild(gifImg);
+                    }
+                    i++;
+
+                    if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
+                        soruGoster(sorularVeCevaplari[i]);
+                    } else if (i >= sorularVeCevaplari.length) {
+                        oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    } else {
+                        oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    }
+                }, 2000);
+
 
             } else {
-                console.log("yanlis cevap");
+
+                const gifImg = dogruYanlisGif("wrong", "dSikki");
+                setTimeout(() => {
+                    if (gifImg != null) {
+                        document.getElementById("dSikki").removeChild(gifImg);
+                    }
+
+                    i++;
+
+                    if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
+                        soruGoster(sorularVeCevaplari[i]);
+                    } else if (i >= sorularVeCevaplari.length) {
+                        oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    } else {
+                        oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent);
+                    }
+                }, 2000);
             }
 
-            i++;
-            if (i < sorularVeCevaplari.length && document.getElementById("kalanSure").textContent != 'Süre doldu!') {
-                soruGoster(sorularVeCevaplari[i]);
-            }
-            else if (i >= sorularVeCevaplari.length) {
-                oyunBitti("Tebrikler! Tüm Soruları Cevapladın. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
-            } else {
-                oyunBitti("Maalesef Süren Bitti. Toplam Puanın = " + document.getElementById("toplamPuan").textContent)
-            }
         })
 
     } catch (error) {
@@ -173,7 +272,27 @@ function oyunBitti(mesaj) {
     document.getElementById("oyunBaslatmaBilgisi").removeAttribute("hidden");
     document.getElementById("oyunBaslatmaBilgisi").children[0].textContent = "Tekrar Denemek İster Misin ? "
 
-    
+    document.getElementById("testiBaslat").addEventListener("click", (event) => {
+        location.reload();
+    });
+}
+
+function dogruYanlisGif(gif, sikId) {
+
+
+    const dogruCevapImg = document.createElement("img");
+    dogruCevapImg.src = "/static/images/" + gif + ".gif";
+    dogruCevapImg.style = "width: 40px";
+    dogruCevapImg.id = "dogruCevapImg";
+
+    if (document.getElementById("dogruCevapImg") == null) {
+        document.getElementById(sikId).appendChild(dogruCevapImg);
+        return dogruCevapImg;
+    } else {
+        return null;
+    }
+
+
 
 }
 
