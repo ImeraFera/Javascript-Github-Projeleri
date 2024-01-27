@@ -16,7 +16,6 @@ async function sorulariGetir() {
     }
 }
 
-
 function kalanSure(sure) {
 
     let dakika = Math.floor(sure / 60);

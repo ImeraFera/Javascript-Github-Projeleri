@@ -1,0 +1,22 @@
+/* Stil sayfası (style.css gibi) */
+
+/* Letter box'lar için genel stil */
+.letter-box {
+    width: 50px; /* Genişlik ayarını değiştirebilirsiniz */
+    height: 50px; /* Yükseklik ayarını değiştirebilirsiniz */
+    background-color: white;
+    border: 1px solid black;
+    margin: 0 5px; /* Kutular arasındaki boşluğu ayarlayabilirsiniz */
+    border: 4px solid cyan;
+}
+
+/* İlgili div'in içindeki harf stilini ayarlamak için örnek */
+.letter-box span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 30px; /* Harf font boyutunu ayarlayabilirsiniz */
+    color: black; /* Harf rengini ayarlayabilirsiniz */
+    font-weight: 700;
+}

@@ -1,0 +1,51 @@
+
+
+<%- include('../partials/head') %>
+
+<%- include('../partials/navbar') %>
+<div class="container-fluid">
+    <div class="d-flex justify-content-center align-items-center">
+        <h1>Resimlerin İfade Ettiği İngilizce Kelimeyi Yaz</h1>
+    </div>
+
+    <div class="col-md-8 mt-4 d-flex justify-content-center align-items-center"
+        id="oyunBaslatmaBilgisi">
+        <h5>Rastgele Resimlerin İngilizce Çevirisini Yaparak Puan Kazanmaya
+            Başlamak İçin Testi
+            Başlat
+        </h5>
+
+        <label for>
+            <button class="btn btn-primary"
+                id="testiBaslat"
+                onclick="oyunuBaslat()">Başla
+            </button>
+        </label>
+    </div>
+
+    <div class="row d-flex justify-content-center align">
+        <div class="justify-content-center" id="oyunEkrani" hidden>
+            <div class="d-flex justify-content-center align-items-center">
+                <div id="soruResmi"
+                    class="col-md-5 mt-4 text-center border border-2 border-info bg-secondary"
+                    style="--bs-bg-opacity: .3;">
+                    <!-- Buraya img elementi gelecek soru ile ilgili -->
+                </div>
+            </div>
+            <div id="letterBoxes"
+                class="mt-4 d-flex justify-content-center align-items-center">
+                <!-- Buraya harf kutuları gelecek -->
+            </div>
+            <div
+                class="mt-4 d-flex justify-content-center align-items-center">
+
+                <button class="btn btn-primary" id="cevaplaBtn" >Cevapla</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/static/js/riy.js"></script>
+
+<%- include('../partials/footer') %>
