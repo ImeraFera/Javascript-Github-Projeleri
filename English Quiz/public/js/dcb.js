@@ -79,12 +79,10 @@ async function oyunuBaslat() {
                 isaretlenenElement.childNodes[0].firstChild.appendChild(imgElement)
                 puan += 10;
                 document.getElementById("toplamPuan").textContent = puan;
-                console.log(isaretlenenElement.childNodes[0].firstChild);
 
             }
             else {
                 isaretlenenElement.childNodes[0].firstChild.appendChild(imgElement2);
-                console.log(isaretlenenElement.childNodes[0].firstChild);
 
             }
 

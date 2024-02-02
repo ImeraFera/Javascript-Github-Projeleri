@@ -1,5 +1,3 @@
-
-
 async function sorulariGetir() {
     try {
         const data = await $.ajax({
@@ -26,15 +24,18 @@ async function oyunuBaslat() {
     document.getElementById("cevaplaBtn").addEventListener("click", (event) => {
 
         kelimeKontrol(sorular[i]);
-        soruSil();
-        i++;
-        if (i < sorular.length) {
-            soruGetir(sorular[i]);
-            return;
-        } else {
-            alert("Oyun Bitti");
-            location.reload();
-        }
+
+        setTimeout(() => {
+            soruSil();
+            i++;
+            if (i < sorular.length) {
+                soruGetir(sorular[i]);
+                return;
+            } else {
+                alert("Oyun Bitti! Puanınız = " + puan);
+                location.reload();
+            }
+        }, 1500);
 
     });
 
@@ -62,13 +63,33 @@ async function kelimeKontrol(soru) {
     }
 
     if (kontrolEt(yazilanCevap, soru.riy_ingilizce)) {
-        console.log("Doğru");
+
+
+        document.getElementById("puanDiv").classList.remove("bg-primary");
+        document.getElementById("puanDiv").classList.add("bg-success");
+
         puan += 10;
-        console.log(puan);
+        setTimeout(() => {
+
+            document.getElementById("puanDiv").classList.remove("bg-success");
+            document.getElementById("puanDiv").classList.add("bg-primary");
+
+        }, 1500);
 
     } else {
-        console.log("Yanlis");
+
+        document.getElementById("puanDiv").classList.remove("bg-primary");
+        document.getElementById("puanDiv").classList.add("bg-danger");
+
+        puan -= 10;
+        setTimeout(() => {
+
+            document.getElementById("puanDiv").classList.remove("bg-danger");
+            document.getElementById("puanDiv").classList.add("bg-primary");
+
+        }, 1500);
     }
+    document.getElementById("toplamPuan").textContent = puan;
 
 }
 
